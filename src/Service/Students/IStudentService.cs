@@ -1,5 +1,6 @@
 ﻿namespace Service.Student;
 
+using Domain.Core;
 using Service.Students;
 
 public interface IStudentService

@@ -1,6 +1,6 @@
 ﻿namespace Data.Students;
 
-using Service.Repositories;
+using Domain.Repositories;
 using Domain.Students;
 using Microsoft.EntityFrameworkCore;
 

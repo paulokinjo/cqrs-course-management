@@ -1,4 +1,4 @@
-﻿using Service.Repositories;
+﻿using Domain.Repositories;
 
 namespace Data;
 

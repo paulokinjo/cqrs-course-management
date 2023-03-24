@@ -1,9 +1,11 @@
 ﻿namespace Service.Student;
 
+using Domain.Core;
 using Domain.Courses;
+using Domain.Repositories;
 using Domain.Students;
-using Service.Repositories;
 using Service.Students;
+using static Domain.Students.EditPersonalInfoCommand;
 
 internal class StudentService : IStudentService
 {
@@ -221,21 +223,14 @@ internal class StudentService : IStudentService
 
     public async Task<ResponseResult> EditStudentPersonalInfoAsync(long id, StudentPersonalInfoDto studentPersonalInfoDto)
     {
-        var student = await repository.GetByIdAsync(id);
-        if (student is null)
+        var command = new EditPersonalInfoCommand
         {
-            return new ResponseResult
-            {
-                Type = ResponseType.Failure,
-                ErrorMessage = $"No student found for Id {id}"
-            };
-        }
-
-        student.Name = studentPersonalInfoDto.Name;
-        student.Email = studentPersonalInfoDto.Email;
-
-        await repository.CommitAsync();
-
-        return new ResponseResult { Type = ResponseType.Success };
+            Id = id,
+            Name = studentPersonalInfoDto.Name,
+            Email = studentPersonalInfoDto.Email,
+        };
+        var handler = new EditPersonalInfoCommandHandler(repository);
+        
+        return await handler.HandleAsync(command);
     }
 }

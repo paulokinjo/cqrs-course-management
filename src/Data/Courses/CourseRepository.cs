@@ -1,6 +1,6 @@
 ﻿using Domain.Courses;
 using Microsoft.EntityFrameworkCore;
-using Service.Repositories;
+using Domain.Repositories;
 
 namespace Data.Courses;
 

@@ -1,7 +1,7 @@
 ﻿namespace Service.Courses;
 
 using Domain.Courses;
-using Service.Repositories;
+using Domain.Repositories;
 
 internal class CourseService : ICourseService
 {

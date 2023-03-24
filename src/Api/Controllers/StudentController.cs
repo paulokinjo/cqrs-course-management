@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Service;
+﻿using Domain.Core;
+using Microsoft.AspNetCore.Mvc;
 using Service.Student;
 using Service.Students;
 
@@ -76,7 +76,7 @@ public class StudentController : BaseController
         var result = await studentService.EditStudentPersonalInfoAsync(id, studentPersonalInfoDto);
         if (result.Type == ResponseType.Success)
         {
-            return Ok();
+            return Ok(ResponseType.Success.ToString());
         }
 
         return Error(result?.ErrorMessage);

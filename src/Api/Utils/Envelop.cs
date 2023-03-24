@@ -16,11 +16,11 @@ public class Envelop<T>
 
 public sealed class Envelop : Envelop<string> 
 {
-    private Envelop(string? errorMessage) : base(null, errorMessage) { }
+    private Envelop(string result, string? errorMessage) : base(result, errorMessage) { }
 
     public static Envelop<T> Ok<T>(T result) => new Envelop<T>(result, null);
 
-    public static Envelop Ok() => new Envelop(null);
+    public static Envelop Ok(string result) => new Envelop(result, null);
 
-    public static Envelop Error(string? errorMessage) => new Envelop(errorMessage);
+    public static Envelop Error(string result, string? errorMessage) => new Envelop(result, errorMessage);
 }
