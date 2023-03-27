@@ -1,7 +1,7 @@
 ﻿using Data.Courses;
 using Data.Students;
-using Microsoft.Extensions.DependencyInjection;
 using Domain.Repositories;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Data.Configurations;
 

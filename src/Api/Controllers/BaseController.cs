@@ -1,17 +1,32 @@
 namespace Api.Controllers;
 
 using Api.Utils;
+using Domain.Core;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
 [Route("api/v1/[controller]")]
 public abstract class BaseController : ControllerBase
 {
-    protected new IActionResult Ok() => base.Ok(Envelop.Ok("200Ok"));
+    protected IActionResult FromResult(ResponseResult result)
+    {
+        if (result == null)
+        {
+            return Error("Internal Server Error.", StatusCodes.Status500InternalServerError);
+        }
 
-    protected IActionResult Ok<T>(T result) => base.Ok(Envelop.Ok(result));
+        if (result.Type == ResponseType.Success)
+        {
+            return Ok(result);
+        }
 
-    protected IActionResult Error(string? errorMessage, int statusCode = 400) => statusCode switch
+        return Error(result.ErrorMessage);
+    }
+
+    private new IActionResult Ok() => base.Ok(Envelop.Ok("200Ok"));
+    private IActionResult Ok<T>(T result) => base.Ok(Envelop.Ok(result));
+
+    private IActionResult Error(string? errorMessage, int statusCode = 400) => statusCode switch
     {
         401 => Unauthorized(Envelop.Error("401 Unauthorized",errorMessage)),
         500 => StatusCode(statusCode, Envelop.Error("500 InternalServerError", errorMessage)),

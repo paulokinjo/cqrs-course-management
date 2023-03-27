@@ -1,6 +1,16 @@
 using Data.Configurations;
+using Domain.Core;
+using Domain.Dtos;
+using Domain.Students;
 using Service.Configurations;
 using Service.Courses;
+using static Domain.Students.DisenrollCommand;
+using static Domain.Students.EditPersonalInfoCommand;
+using static Domain.Students.EnrollCommand;
+using static Domain.Students.GetListQuery;
+using static Domain.Students.RegisterCommand;
+using static Domain.Students.TransferCommand;
+using static Domain.Students.UnregisterCommand;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +24,15 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddTransient<ICommandHandler<EditPersonalInfoCommand>, EditPersonalInfoCommandHandler>();
+builder.Services.AddTransient<ICommandHandler<EnrollCommand>, EnrollCommandHandler>();
+builder.Services.AddTransient<ICommandHandler<DisenrollCommand>, DisenrollCommandHandler>();
+builder.Services.AddTransient<ICommandHandler<RegisterCommand>, RegisterCommandHanlder>();
+builder.Services.AddTransient<ICommandHandler<UnregisterCommand>, UnregisterCommandHanlder>();
+builder.Services.AddTransient<ICommandHandler<TransferCommand>, TransferCommandHandler>();
+builder.Services.AddTransient<IQueryHandler<GetListQuery, List<StudentDto>>, GetListQueryHandler>();
+builder.Services.AddScoped<Messages>();
 
 var app = builder.Build();
 

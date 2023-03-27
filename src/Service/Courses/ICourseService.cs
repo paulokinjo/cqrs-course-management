@@ -1,6 +1,7 @@
 ﻿namespace Service.Courses;
 
 using Domain.Courses;
+using Domain.Dtos;
 
 public interface ICourseService
 {

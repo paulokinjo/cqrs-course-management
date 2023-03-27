@@ -1,6 +1,7 @@
 ﻿namespace Service.Courses;
 
 using Domain.Courses;
+using Domain.Dtos;
 using Domain.Repositories;
 
 internal class CourseService : ICourseService

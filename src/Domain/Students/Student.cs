@@ -27,7 +27,7 @@ public class Student : Entity
     {
     }
 
-    public Student(string name, string email)
+    public Student(string? name, string? email)
         : this()
     {
         Name = name;
